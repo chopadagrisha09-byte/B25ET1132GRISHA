@@ -1,0 +1,79 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Base class for employee basic information
+class Employee {
+protected:
+    int id;
+    string name;
+
+public:
+    void getBasicInfo() {
+        cout << "Enter Employee ID: ";
+        cin >> id;
+
+        cin.ignore();
+        cout << "Enter Employee Name: ";
+        getline(cin, name);
+    }
+
+    void displayBasicInfo() {
+        cout << "\nEmployee ID: " << id << endl;
+        cout << "Employee Name: " << name << endl;
+    }
+};
+
+// Base class for salary information
+class Salary {
+protected:
+    float basic, hra, da, deductions;
+
+public:
+    void getSalaryInfo() {
+        cout << "Enter Basic Salary: ";
+        cin >> basic;
+
+        cout << "Enter HRA: ";
+        cin >> hra;
+
+        cout << "Enter DA: ";
+        cin >> da;
+
+        cout << "Enter Deductions: ";
+        cin >> deductions;
+    }
+
+    float calculateNetSalary() {
+        return basic + hra + da - deductions;
+    }
+
+    void displaySalary() {
+        cout << "Basic Salary: " << basic << endl;
+        cout << "HRA: " << hra << endl;
+        cout << "DA: " << da << endl;
+        cout << "Deductions: " << deductions << endl;
+        cout << "Net Salary: " << calculateNetSalary() << endl;
+    }
+};
+
+// Multiple inheritance
+class EmployeeSalary : public Employee, public Salary {
+public:
+    void display() {
+        displayBasicInfo();
+        displaySalary();
+    }
+};
+
+int main() {
+    EmployeeSalary e;
+
+    e.getBasicInfo();
+    e.getSalaryInfo();
+
+    cout << "\n--- Employee Salary Details ---\n";
+    e.display();
+
+    return 0;
+}
