@@ -1,0 +1,58 @@
+
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class String {
+    char *str;
+
+public:
+    // Default constructor
+    String() {
+        str = new char[1];
+        str[0] = '\0';
+    }
+
+    // Parameterized constructor
+    String(const char *s) {
+        str = new char[strlen(s) + 1];
+        strcpy(str, s);
+    }
+
+    // Function to accept a string
+    void accept() {
+        char temp[100];
+        cout << "Enter a string: ";
+        cin.getline(temp, 100);
+
+        delete[] str;
+        str = new char[strlen(temp) + 1];
+        strcpy(str, temp);
+    }
+
+    // Function to display a string
+    void display() {
+        cout << "String: " << str << endl;
+    }
+
+    // Destructor
+    ~String() {
+        delete[] str;
+    }
+};
+
+int main() {
+    String s1;
+
+    cout << "Using default constructor:" << endl;
+    s1.accept();
+    s1.display();
+
+    String s2("Hello World");
+
+    cout << "\nUsing parameterized constructor:" << endl;
+    s2.display();
+
+    return 0;
+}
+
